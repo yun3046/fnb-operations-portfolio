@@ -1,1 +1,757 @@
-github-upload-ready\index.html
+﻿<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="임덕윤 F&B 운영 진단. 광고 전에 메뉴, 가격, 동선, 인력, 장비, 수익 구조를 먼저 점검합니다."
+    />
+    <title>임덕윤 | F&B 매장 운영 진단</title>
+    <style>
+:root {
+  --bg: #050505;
+  --panel: #0d0d0d;
+  --panel-soft: #141414;
+  --ink: #f4f4f4;
+  --muted: #a4a4a4;
+  --dim: #696969;
+  --line: #262626;
+  --accent: #d8b46a;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% -12%, rgba(216, 180, 106, 0.13), transparent 30%),
+    linear-gradient(180deg, #090909 0%, var(--bg) 48%, #010101 100%);
+  color: var(--ink);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+  word-break: keep-all;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px);
+  opacity: 0.28;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 17px clamp(18px, 5vw, 72px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(5, 5, 5, 0.84);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 26px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.nav-links a,
+.header-cta,
+.button,
+.contact-links a {
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.nav-links a:hover,
+.header-cta:hover,
+.contact-links a:hover {
+  color: var(--accent);
+}
+
+.header-cta {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.hero,
+.section,
+.contact,
+footer {
+  padding-right: clamp(18px, 5vw, 72px);
+  padding-left: clamp(18px, 5vw, 72px);
+}
+
+.hero {
+  min-height: calc(100vh - 73px);
+  padding-top: clamp(42px, 7vw, 92px);
+  padding-bottom: clamp(56px, 8vw, 112px);
+}
+
+.credit-line,
+.section-label {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.credit-line {
+  margin-bottom: clamp(40px, 7vw, 84px);
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 390px);
+  gap: clamp(34px, 7vw, 96px);
+  align-items: end;
+}
+
+.hero-copy {
+  max-width: 1000px;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 1040px;
+  margin-bottom: 28px;
+  font-size: clamp(46px, 7.4vw, 104px);
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.hero-text {
+  max-width: 760px;
+  margin-bottom: 34px;
+  color: #c9c9c9;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.82;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  border-radius: 999px;
+  padding: 0 22px;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button.primary {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #060606;
+}
+
+.button.secondary {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.button.secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.profile-card {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: rgba(13, 13, 13, 0.84);
+  box-shadow: var(--shadow);
+}
+
+.profile-photo {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent), var(--panel-soft);
+  color: var(--dim);
+  font-size: 22px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.profile-line {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.profile-line span {
+  color: var(--dim);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+}
+
+.profile-line strong {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(38px, 6vw, 74px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.signal-grid div {
+  min-height: 132px;
+  padding: 22px;
+  background: rgba(13, 13, 13, 0.92);
+}
+
+.signal-grid strong {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.signal-grid span {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 850;
+  line-height: 1.55;
+}
+
+.section {
+  padding-top: clamp(74px, 10vw, 132px);
+  padding-bottom: clamp(74px, 10vw, 132px);
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 470px);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+  margin-top: 30px;
+  margin-bottom: 28px;
+}
+
+.section-heading h2,
+.quote-grid h2,
+.proof-layout h2,
+.contact h2 {
+  margin-bottom: 0;
+  font-size: clamp(34px, 4.8vw, 70px);
+  font-weight: 950;
+  line-height: 1.08;
+}
+
+.section-heading p,
+.quote-grid p,
+.service-grid p,
+.proof-list p,
+.contact p,
+footer p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.78;
+}
+
+.check-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.check-list article,
+.service-grid article,
+.proof-list article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(13, 13, 13, 0.78);
+}
+
+.check-list article {
+  min-height: 220px;
+  padding: 22px;
+}
+
+.check-list span,
+.service-grid span,
+.proof-list span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+}
+
+.check-list p {
+  margin: 34px 0 0;
+  color: var(--ink);
+  font-size: clamp(19px, 2vw, 25px);
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.quote-grid,
+.proof-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 520px);
+  gap: clamp(32px, 6vw, 92px);
+  align-items: start;
+  margin-top: 30px;
+}
+
+.quote-grid div {
+  display: grid;
+  gap: 18px;
+}
+
+.quote-grid p {
+  border-left: 1px solid var(--accent);
+  padding-left: 18px;
+  font-size: clamp(17px, 1.7vw, 21px);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.service-grid article {
+  min-height: 270px;
+  padding: 24px;
+}
+
+.service-grid h3,
+.proof-list strong {
+  display: block;
+  margin: 20px 0 12px;
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.2;
+}
+
+.proof-list {
+  display: grid;
+  gap: 12px;
+}
+
+.proof-list article {
+  padding: 24px;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 370px);
+  gap: clamp(28px, 6vw, 88px);
+  align-items: end;
+  padding-top: clamp(74px, 10vw, 132px);
+  padding-bottom: clamp(74px, 10vw, 132px);
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.contact h2 {
+  margin: 30px 0 22px;
+}
+
+.contact-links {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-links a {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  color: var(--ink);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 950;
+}
+
+.contact-links a:hover {
+  border-color: var(--accent);
+}
+
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+  padding-top: 26px;
+  padding-bottom: 34px;
+}
+
+footer p {
+  color: var(--dim);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 1120px) {
+  .check-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 940px) {
+  .hero-layout,
+  .section-heading,
+  .quote-grid,
+  .proof-layout,
+  .contact {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    max-width: 560px;
+  }
+
+  .signal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .header-cta {
+    padding: 9px 13px;
+  }
+
+  h1 {
+    font-size: 43px;
+  }
+
+  .hero-text {
+    font-size: 16px;
+  }
+
+  .hero-actions,
+  .button {
+    width: 100%;
+  }
+
+  .profile-photo {
+    min-height: 270px;
+  }
+
+  .profile-line,
+  .signal-grid,
+  .check-list,
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-grid div,
+  .check-list article,
+  .service-grid article {
+    min-height: auto;
+  }
+
+  .contact-links a {
+    font-size: 18px;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#hero">임덕윤</a>
+      <nav class="nav-links" aria-label="주요 섹션">
+        <a href="#diagnosis">자가진단</a>
+        <a href="#services">진단영역</a>
+        <a href="#proof">근거</a>
+        <a href="#contact">문의</a>
+      </nav>
+      <a class="header-cta" href="tel:01064873350">010-6487-3350</a>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <p class="credit-line">F&B STORE OPERATIONS DIAGNOSIS</p>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">초기 창업자 · 소규모 매장 사장님을 위한 현실적인 운영 점검</p>
+            <h1>광고를 하기 전에, 팔릴 수 있는 매장 구조부터 점검합니다.</h1>
+            <p class="hero-text">
+              메뉴, 가격, 동선, 인력, 장비, 홍보를 따로 보지 않습니다. 손님이 구매하고,
+              직원이 실행하고, 대표에게 수익이 남는 하나의 운영 구조로 연결합니다.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#diagnosis">우리 매장 먼저 확인하기</a>
+              <a class="button secondary" href="mailto:yun3046@gmail.com">메일로 문의하기</a>
+            </div>
+          </div>
+
+          <aside class="profile-card" aria-label="프로필">
+            <div class="profile-photo"><span>PROFILE<br />PHOTO</span></div>
+            <div class="profile-line">
+              <span>CONSULTANT</span>
+              <strong>임덕윤</strong>
+            </div>
+            <div class="profile-line">
+              <span>FOCUS</span>
+              <strong>현장형 F&B 운영 진단 · 창업 준비 · 수익 구조 점검</strong>
+            </div>
+          </aside>
+        </div>
+
+        <div class="signal-grid" aria-label="핵심 숫자">
+          <div>
+            <strong>월 3억</strong>
+            <span>규모 매장 운영 경험</span>
+          </div>
+          <div>
+            <strong>30명+</strong>
+            <span>직원 규모 현장 관리</span>
+          </div>
+          <div>
+            <strong>27개</strong>
+            <span>품목 생산·잔량·재고율 관리</span>
+          </div>
+          <div>
+            <strong>20,000개+</strong>
+            <span>B2B·단체 납품 운영</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section diagnosis" id="diagnosis">
+        <div class="section-label">SELF CHECK</div>
+        <div class="section-heading">
+          <h2>아래 항목 중 2개 이상 해당된다면, 광고보다 매장 구조를 먼저 봐야 할 수 있습니다.</h2>
+          <p>
+            상담을 권하기 전에 먼저 사장님이 스스로 문제를 발견할 수 있도록 만들었습니다.
+            부담 없는 진단은 여기서 시작됩니다.
+          </p>
+        </div>
+        <div class="check-list">
+          <article>
+            <span>01</span>
+            <p>매출은 나오는데 통장에 돈이 남지 않는다.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <p>대표가 자리를 비우면 매장 운영이 흔들린다.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <p>메뉴가 많지만 실제로 팔리는 메뉴는 정해져 있다.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <p>직원들이 같은 질문을 반복하고 기준이 자주 바뀐다.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <p>광고를 해도 재방문이나 객단가로 이어지지 않는다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section perspective">
+        <div class="section-label">POINT OF VIEW</div>
+        <div class="quote-grid">
+          <h2>매출이 부족한 게 아니라, 손님이 무엇을 사야 할지 빠르게 결정하지 못하는 매장일 수 있습니다.</h2>
+          <div>
+            <p>
+              광고 효과가 없는 것이 아니라, 광고를 보고 온 손님을 매장이 제대로
+              받아주지 못하고 있을 수 있습니다.
+            </p>
+            <p>
+              직원이 부족한 것이 아니라, 직원에게 판단을 너무 많이 맡기는 운영 구조일 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section services" id="services">
+        <div class="section-label">SERVICE AREA</div>
+        <div class="section-heading">
+          <h2>컨설팅은 화려한 제안서보다, 매장에서 바로 적용되는 한 가지 개선안이 중요합니다.</h2>
+          <p>
+            모든 매장에 같은 방법을 적용하지 않습니다. 현재 조건에서 먼저 고쳐야 할 부분과
+            나중에 해도 되는 일을 구분합니다.
+          </p>
+        </div>
+        <div class="service-grid">
+          <article>
+            <span>OPENING</span>
+            <h3>신규 매장 오픈 준비</h3>
+            <p>장비, POS, 배달앱, 오픈 동선, 직원 교육, 체크리스트를 현실 기준으로 정리합니다.</p>
+          </article>
+          <article>
+            <span>PROFIT</span>
+            <h3>원가·인건비·수익성 점검</h3>
+            <p>높은 매출이 아니라 실제로 남는 구조인지 메뉴, 제조 시간, 폐기, 인력을 함께 봅니다.</p>
+          </article>
+          <article>
+            <span>MENU</span>
+            <h3>메뉴와 가격 구조</h3>
+            <p>잘 팔리는 메뉴와 많이 남는 메뉴를 구분하고, 고객이 빠르게 선택할 구조를 만듭니다.</p>
+          </article>
+          <article>
+            <span>FLOW</span>
+            <h3>매장 동선과 직원 운영</h3>
+            <p>직원이 불필요하게 왕복하는 지점, 판단이 갈리는 지점, 교육이 필요한 기준을 찾습니다.</p>
+          </article>
+          <article>
+            <span>POP-UP</span>
+            <h3>팝업·B2B 운영 설계</h3>
+            <p>장비 구매·렌탈, 전기 용량, 철수 비용, 납품 흐름, BEP를 의사결정 자료로 정리합니다.</p>
+          </article>
+          <article>
+            <span>MARKETING</span>
+            <h3>홍보 전 매장 구조 점검</h3>
+            <p>예쁜 콘텐츠보다 손님이 저장하고 구매할 이유, 대표 메뉴, 재방문 동선을 먼저 확인합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section proof" id="proof">
+        <div class="section-label">WHY ME</div>
+        <div class="proof-layout">
+          <h2>직접 장사해본 현실감과, 대기업·해외 브랜드에서 배운 운영 시스템을 함께 제공합니다.</h2>
+          <div class="proof-list">
+            <article>
+              <span>01</span>
+              <strong>직접 창업·운영</strong>
+              <p>약 4년간 메뉴 선정, 가격 책정, 식자재비, 배달, 단골 영업, 직원관리를 직접 경험했습니다.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>CJ제일제당 외식사업부</strong>
+              <p>매출·비용·메뉴·프리미엄 서비스 기준을 대기업 외식 시스템 안에서 익혔습니다.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Starbucks Canada · BB.Q USA</strong>
+              <p>북미 현장에서 Supervisor, 오픈 지원, 가맹점주 교육, 배달 플랫폼 운영을 경험했습니다.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <strong>Jumbo Group · Orange Bagel</strong>
+              <p>한국 셋업, 운영 기준 구축, 월 3억 규모 매장과 B2B 납품 운영 자료를 관리했습니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div>
+          <div class="section-label">CONTACT</div>
+          <h2>무엇을 맡겨야 할지 명확하지 않아도 괜찮습니다.</h2>
+          <p>
+            현재 가장 큰 문제와 먼저 결정해야 할 일을 구분하는 것부터 시작합니다.
+            전화 또는 이메일로 매장 상황을 간단히 보내주세요.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a href="tel:01064873350">010-6487-3350</a>
+          <a href="mailto:yun3046@gmail.com">yun3046@gmail.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>임덕윤 · F&B 매장 운영 진단 · 광고 전에 구조부터 봅니다.</p>
+    </footer>
+
+    <script>
+const header = document.querySelector(".site-header");
+
+const setHeaderState = () => {
+  const isScrolled = window.scrollY > 16;
+  header.style.boxShadow = isScrolled
+    ? "0 10px 30px rgba(23, 23, 23, 0.08)"
+    : "none";
+};
+
+window.addEventListener("scroll", setHeaderState, { passive: true });
+setHeaderState();
+
+</script>
+  </body>
+</html>
+
