@@ -228,13 +228,17 @@ h1 {
   place-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent), var(--panel-soft);
-  color: var(--dim);
-  font-size: 22px;
-  font-weight: 950;
-  letter-spacing: 0.16em;
-  line-height: 1.45;
-  text-align: center;
+  overflow: hidden;
+  background: var(--panel-soft);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  object-position: 58% 45%;
+  filter: grayscale(18%) contrast(1.04);
 }
 
 .profile-line {
@@ -565,7 +569,9 @@ footer p {
           </div>
 
           <aside class="profile-card" aria-label="프로필">
-            <div class="profile-photo"><span>PROFILE<br />PHOTO</span></div>
+            <div class="profile-photo">
+              <img src="profile.jpg" alt="F&B 현장에서 작업 중인 임덕윤 프로필 사진" />
+            </div>
             <div class="profile-line">
               <span>CONSULTANT</span>
               <strong>임덕윤</strong>
